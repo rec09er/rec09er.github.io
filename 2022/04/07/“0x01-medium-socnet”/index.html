@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://example.com/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users/aksec/Desktop/blog/source_posts/1649307954205-ed92acb2-90fe-4e69-b068-78965b9b1f5b.png">
 <meta property="og:image" content="http://example.com/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users/aksec/Desktop/blog/source_posts/1648188385535-c46c52b8-8dce-4822-a103-24c203f55a28.png">
 <meta property="article:published_time" content="2022-04-07T05:18:17.000Z">
-<meta property="article:modified_time" content="2022-04-07T08:38:15.248Z">
+<meta property="article:modified_time" content="2022-04-07T09:23:37.994Z">
 <meta property="article:author" content="rec09er">
 <meta property="article:tag" content="系统运维,数通,漏洞扫描,漏洞复现,渗透测试,代码审计,基线加固,应急响应">
 <meta name="twitter:card" content="summary">
@@ -236,65 +236,65 @@
 </ul>
 <h3 id="简要流程："><a href="#简要流程：" class="headerlink" title="简要流程："></a>简要流程：</h3><p>主机发现：</p>
 <p>​        目标靶机和攻击机在同一网段下，优先选择二层主机发现工具。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649234730398-17031088-8cc8-4b8e-bddf-646c36009d4e.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649234730398-17031088-8cc8-4b8e-bddf-646c36009d4e.png" alt="1649234730398-17031088-8cc8-4b8e-bddf-646c36009d4e"></p>
 <p>端口扫描：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235043142-3b8cf45a-8cf8-4340-9f15-cbb5ee5e10d2.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235043142-3b8cf45a-8cf8-4340-9f15-cbb5ee5e10d2.png" alt="1649235043142-3b8cf45a-8cf8-4340-9f15-cbb5ee5e10d2"></p>
 <p>服务版本探测：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235171313-6eefa356-69af-4753-bc4e-d9292dabac2e.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235171313-6eefa356-69af-4753-bc4e-d9292dabac2e.png" alt="1649235171313-6eefa356-69af-4753-bc4e-d9292dabac2e"></p>
 <p>web侦查：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235363559-033299b8-0d0e-45d6-aca9-5ea1b26b431d.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235397510-0e86c972-dfde-425b-ae49-f5f2f221d093.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235363559-033299b8-0d0e-45d6-aca9-5ea1b26b431d.png" alt="1649235363559-033299b8-0d0e-45d6-aca9-5ea1b26b431d"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649235397510-0e86c972-dfde-425b-ae49-f5f2f221d093.png" alt="1649235397510-0e86c972-dfde-425b-ae49-f5f2f221d093"></p>
 <p>目录扫描：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649236317809-fe5b3071-03e9-494f-adb3-a21490eb9ed3.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649236317809-fe5b3071-03e9-494f-adb3-a21490eb9ed3.png" alt="1649236317809-fe5b3071-03e9-494f-adb3-a21490eb9ed3"></p>
 <p>访问后台地址：</p>
 <p>​        根据页面信息推测这是一个代码执行的页面，结合之前使用nmap搜集到的信息得知服务端运行的是python2.7开发环境，尝试向表单写入一段python代码，根据回显结果得知代码被成功执行，进而写入一段python反弹shell代码(网上搜索或者利用msf生成)。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649237074663-162633d8-593e-4946-acda-7335313527ee.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649237074663-162633d8-593e-4946-acda-7335313527ee.png" alt="1649237074663-162633d8-593e-4946-acda-7335313527ee"></p>
 <p>​        如果服务端识别不了写入的代码&#x2F;命令，会报错提示。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649237171073-5f6ce3af-f69a-47bb-9acb-70422b9f9438.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649237171073-5f6ce3af-f69a-47bb-9acb-70422b9f9438.png" alt="1649237171073-5f6ce3af-f69a-47bb-9acb-70422b9f9438"></p>
 <p>反弹shell：</p>
 <p>​        发现是另外一个IP网段的地址。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649238071978-6e44ffd5-b768-4530-9bca-cf682e3d7e1d.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649238071978-6e44ffd5-b768-4530-9bca-cf682e3d7e1d.png" alt="1649238071978-6e44ffd5-b768-4530-9bca-cf682e3d7e1d"></p>
 <p>判断拿下的主机是否处在docker环境中：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649238546984-417fce26-2aae-47a9-837e-5ba95553c6dd.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649238546984-417fce26-2aae-47a9-837e-5ba95553c6dd.png" alt="1649238546984-417fce26-2aae-47a9-837e-5ba95553c6dd"></p>
 <p>内网主机发现：</p>
 <p>​        172.17.0.1，172.17.0.2，172.17.0.3。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649238854379-bfcab66b-056b-4e86-8cb3-4825c8af573c.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649238854379-bfcab66b-056b-4e86-8cb3-4825c8af573c.png" alt="1649238854379-bfcab66b-056b-4e86-8cb3-4825c8af573c"></p>
 <p>内网穿透：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649296829021-5c055a62-dc38-4422-9a3b-5635afadd0dc.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649296939121-ea0bb1cb-716b-4451-9820-60cde25e6ae5.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649296829021-5c055a62-dc38-4422-9a3b-5635afadd0dc.png" alt="1649296829021-5c055a62-dc38-4422-9a3b-5635afadd0dc"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649296939121-ea0bb1cb-716b-4451-9820-60cde25e6ae5.png" alt="1649296939121-ea0bb1cb-716b-4451-9820-60cde25e6ae5"></p>
 <p>内网信息搜集：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649302487034-f846d0d5-d65e-4a58-87b2-0d4aae01a4db.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649302756998-87fef307-3eea-40b1-9cf4-2145b003a097.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649302487034-f846d0d5-d65e-4a58-87b2-0d4aae01a4db.png" alt="1649302487034-f846d0d5-d65e-4a58-87b2-0d4aae01a4db"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649302756998-87fef307-3eea-40b1-9cf4-2145b003a097.png" alt="1649302756998-87fef307-3eea-40b1-9cf4-2145b003a097"></p>
 <p>漏洞利用：</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649303560437-94c7e4ef-67ef-454a-b036-20685f618886.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649303930830-f3debb1c-7857-4cff-9ab6-1ced7845a110.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649303829938-1653040a-4617-4e1d-b08a-b412f6cc7d10.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649304241416-3c3a5209-4275-41a1-97d3-011b593efe94.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649303560437-94c7e4ef-67ef-454a-b036-20685f618886.png" alt="1649303560437-94c7e4ef-67ef-454a-b036-20685f618886"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649303930830-f3debb1c-7857-4cff-9ab6-1ced7845a110.png" alt="1649303930830-f3debb1c-7857-4cff-9ab6-1ced7845a110"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649303829938-1653040a-4617-4e1d-b08a-b412f6cc7d10.png" alt="1649303829938-1653040a-4617-4e1d-b08a-b412f6cc7d10"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649304241416-3c3a5209-4275-41a1-97d3-011b593efe94.png" alt="1649304241416-3c3a5209-4275-41a1-97d3-011b593efe94"></p>
 <p>密码破解：</p>
 <p>​        ls发现存在敏感文件passwords，通过MD5在线解密网站进行破解。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649304441913-18d46af8-b40f-4ee1-a06f-8dc3a3eda585.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649304441913-18d46af8-b40f-4ee1-a06f-8dc3a3eda585.png" alt="1649304441913-18d46af8-b40f-4ee1-a06f-8dc3a3eda585"></p>
 <p>​        md5在线解密破解网站：</p>
 <p>​            <a target="_blank" rel="noopener" href="https://cmd5.com/">https://cmd5.com/</a></p>
 <p>​            <a target="_blank" rel="noopener" href="https://www.somd5.com/">https://www.somd5.com/</a></p>
 <p>​            <a target="_blank" rel="noopener" href="http://www.chamd5.org/">http://www.chamd5.org/</a></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649304999289-4dd1cdf1-37f7-4365-863a-5306f8eeeed5.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649304999289-4dd1cdf1-37f7-4365-863a-5306f8eeeed5.png" alt="1649304999289-4dd1cdf1-37f7-4365-863a-5306f8eeeed5"></p>
 <p>​        使用这些账号尝试登陆靶机，john账号成功登录。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305365101-1f41b70a-622e-4fd7-89f9-026a9b4e0ab9.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305365101-1f41b70a-622e-4fd7-89f9-026a9b4e0ab9.png" alt="1649305365101-1f41b70a-622e-4fd7-89f9-026a9b4e0ab9"></p>
 <p>​        确实存在多网卡，docker0。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305428611-ec9f2afd-bd4b-489f-9ebb-98cf0cb69c02.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305428611-ec9f2afd-bd4b-489f-9ebb-98cf0cb69c02.png" alt="1649305428611-ec9f2afd-bd4b-489f-9ebb-98cf0cb69c02"></p>
 <p>本地提权：</p>
 <p>​        内核漏洞提权，系统内核版本过低，搜索提权的exp。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305776132-48e85ca8-f3fe-4bd8-b7b8-1aa12fedcb94.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305973653-f51c3926-7467-4aba-bf08-9b5da5a1d49d.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305776132-48e85ca8-f3fe-4bd8-b7b8-1aa12fedcb94.png" alt="1649305776132-48e85ca8-f3fe-4bd8-b7b8-1aa12fedcb94"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649305973653-f51c3926-7467-4aba-bf08-9b5da5a1d49d.png" alt="1649305973653-f51c3926-7467-4aba-bf08-9b5da5a1d49d"></p>
 <p>​        靶机没有安装gcc编译器，分析源码，里面有一处使用system函数执行系统命令，并再一次调用了gcc编译ofs-lib.c文件生成一个动态链接库，需要将这段代码注释掉，不然会报错。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649306860556-4f4e006d-697a-4636-90d9-9356ae31df08.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649306860556-4f4e006d-697a-4636-90d9-9356ae31df08.png" alt="1649306860556-4f4e006d-697a-4636-90d9-9356ae31df08"></p>
 <p>​        在kali上编译，编译过程报了一些警告不管它，能正常编译完成；要执行这个exp还需要一个已经编译生成好的二进制库文件ofs-lib.so，locate本地查找下。</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307300689-1337942a-65ca-4635-8324-a04f24e56d5d.png" alt="img">  </p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307479485-6187b15b-1e27-4b76-ba3d-1dc0fff6112d.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307300689-1337942a-65ca-4635-8324-a04f24e56d5d.png" alt="1649307300689-1337942a-65ca-4635-8324-a04f24e56d5d">  </p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307479485-6187b15b-1e27-4b76-ba3d-1dc0fff6112d.png" alt="1649307479485-6187b15b-1e27-4b76-ba3d-1dc0fff6112d"></p>
 <pre><code>     将exp和ofs-lib.so上传到靶机的/tmp目录下，该目录的权限较大，并给exp赋予执行权限，然后执行exp，提权成功。
 </code></pre>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307785957-4cef5612-3e74-4c44-9c4c-d48ac60ac2e2.png" alt="img"></p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307954205-ed92acb2-90fe-4e69-b068-78965b9b1f5b.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307785957-4cef5612-3e74-4c44-9c4c-d48ac60ac2e2.png" alt="1649307785957-4cef5612-3e74-4c44-9c4c-d48ac60ac2e2"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1649307954205-ed92acb2-90fe-4e69-b068-78965b9b1f5b.png" alt="1649307954205-ed92acb2-90fe-4e69-b068-78965b9b1f5b"></p>
 <h3 id="TIPS："><a href="#TIPS：" class="headerlink" title="TIPS："></a>TIPS：</h3><p>arp-scan工具：一款轻量ARP扫描工具，该工具会自动解析MAC地址。</p>
 <p>​        用法：arp-scan -l</p>
 <p>fscan工具：一款内网综合扫描工具，方便一键自动化、全方位漏扫扫描。</p>
@@ -305,7 +305,7 @@
 <p>werkzeug服务(作为许多Python Web框架的底层库)；</p>
 <p>python的反弹shell脚本：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35569814/article/details/101948118">https://blog.csdn.net/qq_35569814/article/details/101948118</a></p>
 <p>nc监听：nc -nvlp 端口号</p>
-<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1648188385535-c46c52b8-8dce-4822-a103-24c203f55a28.png" alt="img"></p>
+<p><img src="/2022/04/07/%E2%80%9C0x01-medium-socnet%E2%80%9D/Users\aksec\Desktop\blog\source_posts\1648188385535-c46c52b8-8dce-4822-a103-24c203f55a28.png" alt="1648188385535-c46c52b8-8dce-4822-a103-24c203f55a28"></p>
 <p>Dockerfile(用来构建镜像的文本文件)；</p>
 <p>判断靶机是否存在docker环境：</p>
 <p>​        ll &#x2F;.dockerenv</p>
